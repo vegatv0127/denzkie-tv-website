@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Denzkie TV — Stream Anywhere on Android</title>
+  <meta name="description" content="Download Denzkie TV v5.4.1 for Android. Fast streaming, extensions support, offline downloads, and casting." />
+  <link rel="icon" type="image/png" href="logo.png" />
+  <style>
+    :root {
+      --bg: #070709;
+      --surface: rgba(255, 255, 255, 0.035);
+      --border: rgba(255, 255, 255, 0.1);
+      --red: #ef233c;
+      --red-dark: #b91c1c;
+      --silver: #e5e7eb;
+      --muted: #9ca3af;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+      background:
+        radial-gradient(circle at 50% -10%, rgba(239, 35, 60, 0.24), transparent 45%),
+        radial-gradient(circle at 85% 30%, rgba(185, 28, 28, 0.12), transparent 40%),
+        var(--bg);
+      color: #f9fafb;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+    /* Nav */
+    header {
+      position: sticky; top: 0; z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(7, 7, 9, 0.78);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 68px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.15rem; letter-spacing: 0.4px; }
+    .brand img { width: 38px; height: 38px; border-radius: 10px; object-fit: cover; }
+    .brand span {
+      background: linear-gradient(135deg, #ffffff, #9ca3af);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-links { display: flex; gap: 24px; font-size: 0.95rem; color: var(--muted); }
+    .nav-links a:hover { color: #fff; }
+
+    /* Hero */
+    .hero {
+      padding: 72px 0 56px;
+      text-align: center;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .logo-wrap {
+      position: relative;
+      width: 164px; height: 164px;
+      margin-bottom: 26px;
+      border-radius: 34px;
+      padding: 6px;
+      background: linear-gradient(145deg, rgba(239,35,60,0.7), rgba(255,255,255,0.18));
+      box-shadow: 0 0 60px rgba(239, 35, 60, 0.35);
+    }
+    .logo-wrap img {
+      width: 100%; height: 100%; object-fit: cover;
+      border-radius: 28px; background: #000; display: block;
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px; border-radius: 999px;
+      background: rgba(239, 35, 60, 0.14);
+      border: 1px solid rgba(239, 35, 60, 0.4);
+      color: #fca5a5; font-size: 0.85rem; font-weight: 600;
+      margin-bottom: 18px;
+    }
+    h1 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 900; line-height: 1.1; letter-spacing: -0.02em;
+      background: linear-gradient(180deg, #ffffff 30%, #9ca3af 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 16px;
+    }
+    .subtitle {
+      max-width: 620px; color: var(--muted); font-size: 1.08rem;
+      margin-bottom: 32px;
+    }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 14px 28px; border-radius: 14px; font-weight: 700; font-size: 1rem;
+      cursor: pointer; border: none; transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--red), var(--red-dark));
+      color: #fff;
+      box-shadow: 0 10px 30px rgba(239, 35, 60, 0.38);
+    }
+    .btn-primary:hover { box-shadow: 0 14px 36px rgba(239, 35, 60, 0.55); transform: translateY(-1px); }
+    .btn-secondary {
+      background: var(--surface); color: #fff;
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.08); }
+    .meta-note { margin-top: 14px; font-size: 0.84rem; color: #6b7280; }
+
+    /* Sections */
+    section { padding: 56px 0; }
+    .section-title {
+      text-align: center; font-size: 1.85rem; font-weight: 800; margin-bottom: 10px;
+    }
+    .section-sub { text-align: center; color: var(--muted); margin-bottom: 36px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .card:hover { border-color: rgba(239, 35, 60, 0.45); transform: translateY(-2px); }
+    .icon-box {
+      width: 44px; height: 44px; border-radius: 12px;
+      display: grid; place-items: center;
+      background: rgba(239, 35, 60, 0.15);
+      border: 1px solid rgba(239, 35, 60, 0.3);
+      font-size: 1.25rem; margin-bottom: 14px;
+    }
+    .card h3 { font-size: 1.08rem; margin-bottom: 8px; }
+    .card p { font-size: 0.93rem; color: var(--muted); }
+
+    /* Setup box */
+    .setup-box {
+      background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(239,35,60,0.06));
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 32px;
+    }
+    .steps { display: grid; gap: 18px; margin-top: 22px; }
+    .step {
+      display: flex; gap: 16px; align-items: flex-start;
+      background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.07);
+      padding: 18px; border-radius: 16px;
+    }
+    .step-num {
+      flex-shrink: 0; width: 32px; height: 32px; border-radius: 10px;
+      background: var(--red); color: #fff; font-weight: 800;
+      display: grid; place-items: center;
+    }
+    .copy-row {
+      margin-top: 10px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    }
+    .url-pill {
+      flex: 1; min-width: 220px;
+      background: #0b0d12; border: 1px solid var(--border);
+      padding: 10px 14px; border-radius: 10px;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 0.88rem; color: #e5e7eb; overflow-x: auto;
+    }
+    .btn-copy {
+      padding: 10px 16px; border-radius: 10px; font-size: 0.88rem; font-weight: 700;
+      background: #fff; color: #111; border: none; cursor: pointer;
+    }
+    .btn-copy:hover { background: #e5e7eb; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0 40px;
+      text-align: center; color: #6b7280; font-size: 0.88rem;
+    }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .setup-box { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="#" class="brand">
+        <img src="logo.png" alt="Denzkie TV Logo" />
+        <span>Denzkie TV</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#setup">Setup Providers</a>
+        <a href="#download">Download</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero" id="download">
+      <div class="logo-wrap">
+        <img src="logo.png" alt="Denzkie TV" />
+      </div>
+      <div class="badge">v5.4.1 &bull; Android 9+ (arm64-v8a)</div>
+      <h1>Denzkie TV</h1>
+      <p class="subtitle">
+        A fast, dark-themed Android streaming player with modular extensions, offline downloads, external subtitles, and wireless casting.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://github.com/vegatv0127/denzkie-tv-website/releases/download/v5.4.1/denzkie-tv-v5.4.1.apk" download>
+          Download APK (v5.4.1)
+        </a>
+        <a class="btn btn-secondary" href="#setup">
+          How to Add Providers
+        </a>
+      </div>
+      <p class="meta-note">Package: com.denzkie.tv &bull; ~73 MB &bull; Enable "Install unknown apps" if prompted</p>
+    </section>
+
+    <section id="features">
+      <h2 class="section-title">Built for Smooth Playback</h2>
+      <p class="section-sub">Everything you need in one clean Android app.</p>
+      <div class="grid">
+        <div class="card">
+          <div class="icon-box">&#9654;</div>
+          <h3>Powerful Player Engine</h3>
+          <p>Supports HLS, DASH, MKV, MP4, hardware acceleration, FFmpeg decoding, Picture-in-Picture, and subtitle customization.</p>
+        </div>
+        <div class="card">
+          <div class="icon-box">&#128268;</div>
+          <h3>Modular Providers</h3>
+          <p>Install, update, and switch content extensions anytime right inside Settings without reinstalling the app.</p>
+        </div>
+        <div class="card">
+          <div class="icon-box">&#11015;</div>
+          <h3>Offline Downloads</h3>
+          <p>Save movies and episodes directly to your device storage and keep track of your watch progress offline.</p>
+        </div>
+        <div class="card">
+          <div class="icon-box">&#128250;</div>
+          <h3>Cast &amp; DLNA</h3>
+          <p>Send playback to supported TVs and external players on your local Wi-Fi network.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="setup">
+      <div class="setup-box">
+        <h2 class="section-title" style="text-align:left;">Quick Setup Guide</h2>
+        <p style="color:var(--muted);">Install the APK and load your providers in under a minute:</p>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div>
+              <strong>Install Denzkie TV</strong>
+              <p style="color:var(--muted); font-size:0.93rem;">Download <code>denzkie-tv-v5.4.1.apk</code> above, open it on your Android phone, and allow installs from your browser/file manager.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div style="width:100%;">
+              <strong>Add the Provider Source</strong>
+              <p style="color:var(--muted); font-size:0.93rem;">Open Denzkie TV &rarr; <b>Settings &rarr; Extensions &rarr; Add Source</b> and paste this URL:</p>
+              <div class="copy-row">
+                <div class="url-pill" id="providerUrl">https://github.com/vegatv0127/vegatv-providers</div>
+                <button class="btn-copy" onclick="copyProviderUrl(this)">Copy URL</button>
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div>
+              <strong>Install Your Extensions</strong>
+              <p style="color:var(--muted); font-size:0.93rem;">Pick the providers you want from the list, tap Install, and start watching.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      Denzkie TV &bull; Android Streaming App (v5.4.1)
+    </div>
+  </footer>
+
+  <script>
+    function copyProviderUrl(btn) {
+      const text = document.getElementById('providerUrl').textContent.trim();
+      navigator.clipboard.writeText(text).then(() => {
+        const old = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = old; }, 1800);
+      });
+    }
+  </script>
+</body>
+</html>
